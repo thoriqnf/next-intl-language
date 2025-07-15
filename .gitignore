@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Original day-7 materials (not part of the demo)
+/day-7/
+/_original-day-7-materials/
