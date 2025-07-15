@@ -1,36 +1,337 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Day 7 Session 3: Next.js 15+ Internationalization (i18n) Demo
 
-## Getting Started
+A complete implementation of internationalization using Next.js 15+ and next-intl, featuring a professional dark-themed promotional page with English/Spanish language switching.
 
-First, run the development server:
+## 🌍 Demo Overview
+
+This project demonstrates Next.js 15+ internationalization concepts through a simple, working promotional website that switches between English and Spanish in real-time.
+
+### 🚀 Live Demo
+- **Main Demo**: http://localhost:3000/demo/day-7/session-3
+- **Simple Version**: http://localhost:3000/demo/day-7/session-3/simple
+
+## 🎯 Features
+
+- ✅ **Real-time Language Switching** - English ↔ Spanish with no page reloads
+- ✅ **Professional Dark Theme** - Modern, sleek black interface
+- ✅ **Complete Promotional Site** - Hero, Features, Testimonials, Footer
+- ✅ **Interactive Testing Tools** - Current locale display and test controls
+- ✅ **Pure JavaScript** - No TypeScript dependencies
+- ✅ **KISS Principle** - Simple implementation perfect for learning
+
+## 📋 Implementation Guide
+
+### Step 1: Install Dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install next-intl
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Step 2: Create i18n Configuration
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Create `i18n.js` in your project root:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```javascript
+import { notFound } from 'next/navigation';
+import { getRequestConfig } from 'next-intl/server';
 
-## Learn More
+// Define supported languages
+export const locales = ['en', 'es'];
+export const defaultLocale = 'en';
 
-To learn more about Next.js, take a look at the following resources:
+export default getRequestConfig(async ({ locale }) => {
+  // Validate that the incoming 'locale' parameter is valid
+  if (!locales.includes(locale)) notFound();
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  return {
+    messages: (await import(`./messages/${locale}.json`)).default
+  };
+});
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Step 3: Configure Next.js
 
-## Deploy on Vercel
+Update `next.config.mjs`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```javascript
+import withNextIntl from 'next-intl/plugin';
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+export default withNextIntl('./i18n.js')(nextConfig);
+```
+
+### Step 4: Create Middleware
+
+Create `middleware.js` in your project root:
+
+```javascript
+import createMiddleware from 'next-intl/middleware';
+import { locales, defaultLocale } from './i18n';
+
+export default createMiddleware({
+  locales,
+  defaultLocale,
+  localePrefix: 'as-needed'
+});
+
+export const config = {
+  matcher: ['/', '/(en|es)/:path*']
+};
+```
+
+### Step 5: Create Translation Files
+
+Create `messages/en.json`:
+
+```json
+{
+  "hero": {
+    "title": "Build Amazing Apps",
+    "subtitle": "Create modern, scalable applications with Next.js and the latest web technologies",
+    "cta": "Get Started",
+    "learnMore": "Learn More"
+  },
+  "features": {
+    "title": "Why Choose Our Platform?",
+    "feature1": {
+      "title": "Fast Performance",
+      "description": "Lightning-fast applications with optimized performance"
+    }
+  }
+}
+```
+
+Create `messages/es.json`:
+
+```json
+{
+  "hero": {
+    "title": "Crea Aplicaciones Increíbles",
+    "subtitle": "Desarrolla aplicaciones modernas y escalables con Next.js",
+    "cta": "Comenzar",
+    "learnMore": "Saber Más"
+  },
+  "features": {
+    "title": "¿Por Qué Elegir Nuestra Plataforma?",
+    "feature1": {
+      "title": "Rendimiento Rápido",
+      "description": "Aplicaciones ultrarrápidas con rendimiento optimizado"
+    }
+  }
+}
+```
+
+### Step 6: Create Language Switcher Component
+
+Create `src/components/LanguageSwitcher.jsx`:
+
+```javascript
+'use client';
+
+import { useState } from 'react';
+
+export default function LanguageSwitcher({ locale, onLanguageChange }) {
+  return (
+    <div className="flex items-center space-x-2">
+      <span className="text-sm text-gray-300">Language:</span>
+      <div className="flex space-x-1">
+        <button
+          onClick={() => onLanguageChange('en')}
+          className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+            locale === 'en'
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+          }`}
+        >
+          🇺🇸 EN
+        </button>
+        <button
+          onClick={() => onLanguageChange('es')}
+          className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+            locale === 'es'
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+          }`}
+        >
+          🇪🇸 ES
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Step 7: Create Main Demo Page
+
+Create your main page component:
+
+```javascript
+'use client';
+
+import { useState } from 'react';
+import LanguageSwitcher from './components/LanguageSwitcher';
+
+export default function I18nDemo() {
+  const [locale, setLocale] = useState('en');
+  
+  // Your translation logic here
+  const messages = {
+    en: { /* English translations */ },
+    es: { /* Spanish translations */ }
+  };
+  
+  const t = messages[locale];
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Your component content */}
+    </div>
+  );
+}
+```
+
+## 🎨 Dark Theme Implementation
+
+The demo features a complete dark theme with:
+
+- **Background**: Deep gray/black (`bg-gray-900`, `bg-black`)
+- **Text**: White and light gray (`text-white`, `text-gray-300`)
+- **Cards**: Dark gray with subtle borders (`bg-gray-800`, `border-gray-700`)
+- **Buttons**: Blue accent with hover effects
+- **Gradients**: Dark purple to blue for hero sections
+
+### Color Palette:
+- Primary Background: `#111827` (gray-900)
+- Secondary Background: `#1f2937` (gray-800)
+- Card Background: `#374151` (gray-700)
+- Primary Text: `#ffffff` (white)
+- Secondary Text: `#d1d5db` (gray-300)
+- Accent: `#2563eb` (blue-600)
+
+## 📁 Project Structure
+
+```
+project-root/
+├── i18n.js                          # i18n configuration
+├── middleware.js                     # Language routing
+├── next.config.mjs                   # Next.js + next-intl config
+├── messages/
+│   ├── en.json                       # English translations
+│   └── es.json                       # Spanish translations
+├── src/
+│   ├── app/
+│   │   ├── demo/day-7/session-3/
+│   │   │   ├── simple/page.jsx       # Main demo page
+│   │   │   └── page.jsx              # Redirect to simple
+│   │   └── page.jsx                  # Root redirect
+│   └── components/
+│       └── LanguageSwitcher.jsx      # Language toggle component
+└── README.md                         # This file
+```
+
+## 🚀 Getting Started
+
+1. **Clone and Install**:
+   ```bash
+   npm install
+   ```
+
+2. **Start Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Open Demo**:
+   Navigate to `http://localhost:3000`
+
+## 🧪 Testing Features
+
+### Language Switching
+- Click the EN/ES buttons in the header
+- Watch all content translate instantly
+- No page reloads or navigation required
+
+### Interactive Controls
+- View current locale in the demo controls
+- Use test buttons to switch languages
+- See translation keys update in real-time
+
+### Responsive Design
+- Test on mobile and desktop
+- Dark theme works across all screen sizes
+- Language switcher adapts to mobile layout
+
+## 📚 Key Concepts Demonstrated
+
+### 1. **next-intl Setup**
+- Proper configuration for Next.js 15+
+- Middleware for language routing
+- Translation file organization
+
+### 2. **Client-Side i18n**
+- Real-time language switching
+- State management for locale
+- Dynamic content updates
+
+### 3. **Professional UI**
+- Dark theme implementation
+- Responsive design patterns
+- Interactive components
+
+### 4. **Best Practices**
+- KISS principle implementation
+- Clean code structure
+- Performance optimization
+
+## 🔧 Customization
+
+### Adding New Languages
+1. Add locale to `i18n.js` locales array
+2. Create new translation file in `messages/`
+3. Add button to `LanguageSwitcher.jsx`
+4. Update middleware matcher if needed
+
+### Modifying Content
+1. Edit translation files in `messages/`
+2. Add new translation keys
+3. Use keys in your components
+4. Test across all languages
+
+### Styling Changes
+1. Update Tailwind classes in components
+2. Modify color palette in demo page
+3. Test dark theme contrast
+4. Ensure accessibility compliance
+
+## 🎯 Learning Outcomes
+
+After implementing this demo, you'll understand:
+
+- ✅ How to set up next-intl with Next.js 15+
+- ✅ Creating and organizing translation files
+- ✅ Building language switcher components
+- ✅ Implementing real-time language switching
+- ✅ Dark theme design principles
+- ✅ Professional React component patterns
+
+## 📝 Notes
+
+- **JavaScript Only**: No TypeScript dependencies
+- **Simple Implementation**: Perfect for 1-hour learning session
+- **Production Ready**: Scalable architecture
+- **Dark Theme**: Modern, professional appearance
+- **Responsive**: Works on all devices
+
+## 🚀 Next Steps
+
+1. **Add More Languages**: French, German, etc.
+2. **Database Integration**: Store user language preferences
+3. **SEO Optimization**: Meta tags per language
+4. **Advanced Features**: Pluralization, number formatting
+5. **Testing**: Unit tests for i18n functionality
+
+---
+
+**Built with Next.js 15+ and next-intl** | **Dark Theme Edition** | **Learning Demo**

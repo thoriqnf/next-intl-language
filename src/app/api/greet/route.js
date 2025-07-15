@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 // Simple storage (in real apps, you'd use a database)
-let visitors: string[] = [];
+let visitors = [];
 
 // GET /api/greet - Show who has visited
-export async function GET(request: NextRequest) {
+export async function GET(request) {
   // Get query parameters from URL
   const { searchParams } = new URL(request.url);
   const name = searchParams.get('name');
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
 }
 
 // POST /api/greet - Add a new visitor
-export async function POST(request: NextRequest) {
+export async function POST(request) {
   try {
     const { name, age } = await request.json();
     

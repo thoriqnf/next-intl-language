@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "title": "Crea Aplicaciones Increíbles",
+    "subtitle": "Desarrolla aplicaciones modernas y escalables con Next.js y las últimas tecnologías web",
+    "cta": "Comenzar",
+    "learnMore": "Saber Más"
+  },
+  "features": {
+    "title": "¿Por Qué Elegir Nuestra Plataforma?",
+    "feature1": {
+      "title": "Rendimiento Rápido",
+      "description": "Aplicaciones ultrarrápidas con rendimiento optimizado y carga instantánea"
+    },
+    "feature2": {
+      "title": "Fácil de Usar",
+      "description": "Interfaz intuitiva diseñada para desarrolladores de todos los niveles"
+    },
+    "feature3": {
+      "title": "Escalable",
+      "description": "Construye aplicaciones que crecen con las necesidades de tu negocio"
+    },
+    "feature4": {
+      "title": "Seguro",
+      "description": "Seguridad de nivel empresarial integrada en cada componente"
+    }
+  },
+  "testimonials": {
+    "title": "Lo Que Dicen Nuestros Usuarios",
+    "testimonial1": {
+      "quote": "Esta plataforma transformó cómo construimos aplicaciones. ¡La velocidad y confiabilidad son excepcionales!",
+      "author": "Sarah Johnson",
+      "role": "Desarrolladora Principal en TechCorp"
+    },
+    "testimonial2": {
+      "quote": "La mejor experiencia de desarrollo que he tenido. Todo funciona sin problemas.",
+      "author": "Miguel Rodriguez",
+      "role": "Desarrollador Full Stack"
+    },
+    "testimonial3": {
+      "quote": "La productividad de nuestro equipo aumentó un 300% después de cambiar a esta plataforma.",
+      "author": "Emma Chen",
+      "role": "Gerente de Ingeniería"
+    }
+  },
+  "footer": {
+    "company": "NextDemo Inc.",
+    "copyright": "© 2024 NextDemo Inc. Todos los derechos reservados.",
+    "links": {
+      "about": "Acerca de",
+      "contact": "Contacto",
+      "privacy": "Privacidad",
+      "terms": "Términos"
+    }
+  },
+  "language": {
+    "english": "Inglés",
+    "spanish": "Español",
+    "switchTo": "Cambiar a {language}"
+  }
+}

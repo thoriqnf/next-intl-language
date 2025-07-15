@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "title": "Build Amazing Apps",
+    "subtitle": "Create modern, scalable applications with Next.js and the latest web technologies",
+    "cta": "Get Started",
+    "learnMore": "Learn More"
+  },
+  "features": {
+    "title": "Why Choose Our Platform?",
+    "feature1": {
+      "title": "Fast Performance",
+      "description": "Lightning-fast applications with optimized performance and instant loading"
+    },
+    "feature2": {
+      "title": "Easy to Use",
+      "description": "Intuitive interface designed for developers of all skill levels"
+    },
+    "feature3": {
+      "title": "Scalable",
+      "description": "Build applications that grow with your business needs"
+    },
+    "feature4": {
+      "title": "Secure",
+      "description": "Enterprise-grade security built into every component"
+    }
+  },
+  "testimonials": {
+    "title": "What Our Users Say",
+    "testimonial1": {
+      "quote": "This platform transformed how we build applications. The speed and reliability are outstanding!",
+      "author": "Sarah Johnson",
+      "role": "Lead Developer at TechCorp"
+    },
+    "testimonial2": {
+      "quote": "The best development experience I've ever had. Everything just works seamlessly.",
+      "author": "Miguel Rodriguez",
+      "role": "Full Stack Developer"
+    },
+    "testimonial3": {
+      "quote": "Our team productivity increased by 300% after switching to this platform.",
+      "author": "Emma Chen",
+      "role": "Engineering Manager"
+    }
+  },
+  "footer": {
+    "company": "NextDemo Inc.",
+    "copyright": "© 2024 NextDemo Inc. All rights reserved.",
+    "links": {
+      "about": "About",
+      "contact": "Contact",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    }
+  },
+  "language": {
+    "english": "English",
+    "spanish": "Spanish",
+    "switchTo": "Switch to {language}"
+  }
+}
