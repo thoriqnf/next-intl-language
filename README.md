@@ -7,8 +7,8 @@ A complete implementation of internationalization using Next.js 15+ and next-int
 This project demonstrates Next.js 15+ internationalization concepts through a simple, working promotional website that switches between English and Spanish in real-time.
 
 ### 🚀 Live Demo
+
 - **Main Demo**: http://localhost:3000/demo/day-7/session-3
-- **Simple Version**: http://localhost:3000/demo/day-7/session-3/simple
 
 ## 🎯 Features
 
