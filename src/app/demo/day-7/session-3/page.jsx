@@ -1,124 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import enMessages from "../../../../../messages/en.json";
+import esMessages from "../../../../../messages/es.json";
 
 // Simple demo without full i18n setup for initial testing
 export default function Session3Page() {
   const [locale, setLocale] = useState("en");
 
   const messages = {
-    en: {
-      hero: {
-        title: "Build Amazing Apps",
-        subtitle:
-          "Create modern, scalable applications with Next.js and the latest web technologies",
-        cta: "Get Started",
-        learnMore: "Learn More",
-      },
-      features: {
-        title: "Why Choose Our Platform?",
-        feature1: {
-          title: "Fast Performance",
-          description:
-            "Lightning-fast applications with optimized performance and instant loading",
-        },
-        feature2: {
-          title: "Easy to Use",
-          description:
-            "Intuitive interface designed for developers of all skill levels",
-        },
-        feature3: {
-          title: "Scalable",
-          description: "Build applications that grow with your business needs",
-        },
-        feature4: {
-          title: "Secure",
-          description: "Enterprise-grade security built into every component",
-        },
-      },
-      testimonials: {
-        title: "What Our Users Say",
-        testimonial1: {
-          quote:
-            "This platform transformed how we build applications. The speed and reliability are outstanding!",
-          author: "Sarah Johnson",
-          role: "Lead Developer at TechCorp",
-        },
-        testimonial2: {
-          quote:
-            "The best development experience I've ever had. Everything just works seamlessly.",
-          author: "Miguel Rodriguez",
-          role: "Full Stack Developer",
-        },
-        testimonial3: {
-          quote:
-            "Our team productivity increased by 300% after switching to this platform.",
-          author: "Emma Chen",
-          role: "Engineering Manager",
-        },
-      },
-      footer: {
-        company: "NextDemo Inc.",
-        copyright: "© 2024 NextDemo Inc. All rights reserved.",
-      },
-    },
-    es: {
-      hero: {
-        title: "Crea Aplicaciones Increíbles",
-        subtitle:
-          "Desarrolla aplicaciones modernas y escalables con Next.js y las últimas tecnologías web",
-        cta: "Comenzar",
-        learnMore: "Saber Más",
-      },
-      features: {
-        title: "¿Por Qué Elegir Nuestra Plataforma?",
-        feature1: {
-          title: "Rendimiento Rápido",
-          description:
-            "Aplicaciones ultrarrápidas con rendimiento optimizado y carga instantánea",
-        },
-        feature2: {
-          title: "Fácil de Usar",
-          description:
-            "Interfaz intuitiva diseñada para desarrolladores de todos los niveles",
-        },
-        feature3: {
-          title: "Escalable",
-          description:
-            "Construye aplicaciones que crecen con las necesidades de tu negocio",
-        },
-        feature4: {
-          title: "Seguro",
-          description:
-            "Seguridad de nivel empresarial integrada en cada componente",
-        },
-      },
-      testimonials: {
-        title: "Lo Que Dicen Nuestros Usuarios",
-        testimonial1: {
-          quote:
-            "Esta plataforma transformó cómo construimos aplicaciones. ¡La velocidad y confiabilidad son excepcionales!",
-          author: "Sarah Johnson",
-          role: "Desarrolladora Principal en TechCorp",
-        },
-        testimonial2: {
-          quote:
-            "La mejor experiencia de desarrollo que he tenido. Todo funciona sin problemas.",
-          author: "Miguel Rodriguez",
-          role: "Desarrollador Full Stack",
-        },
-        testimonial3: {
-          quote:
-            "La productividad de nuestro equipo aumentó un 300% después de cambiar a esta plataforma.",
-          author: "Emma Chen",
-          role: "Gerente de Ingeniería",
-        },
-      },
-      footer: {
-        company: "NextDemo Inc.",
-        copyright: "© 2024 NextDemo Inc. Todos los derechos reservados.",
-      },
-    },
+    en: enMessages,
+    es: esMessages,
   };
 
   const t = messages[locale];

@@ -171,15 +171,16 @@ Create your main page component:
 'use client';
 
 import { useState } from 'react';
+import enMessages from '../../../../../messages/en.json';
+import esMessages from '../../../../../messages/es.json';
 import LanguageSwitcher from './components/LanguageSwitcher';
 
 export default function I18nDemo() {
   const [locale, setLocale] = useState('en');
   
-  // Your translation logic here
   const messages = {
-    en: { /* English translations */ },
-    es: { /* Spanish translations */ }
+    en: enMessages,
+    es: esMessages
   };
   
   const t = messages[locale];
@@ -218,13 +219,13 @@ project-root/
 ├── middleware.js                     # Language routing
 ├── next.config.mjs                   # Next.js + next-intl config
 ├── messages/
-│   ├── en.json                       # English translations
-│   └── es.json                       # Spanish translations
+│   ├── en.json                       # English translations (single source of truth)
+│   └── es.json                       # Spanish translations (single source of truth)
 ├── src/
 │   ├── app/
 │   │   ├── demo/day-7/session-3/
 │   │   │   ├── simple/page.jsx       # Main demo page
-│   │   │   └── page.jsx              # Redirect to simple
+│   │   │   └── page.jsx              # Alternative demo version
 │   │   └── page.jsx                  # Root redirect
 │   └── components/
 │       └── LanguageSwitcher.jsx      # Language toggle component
@@ -289,15 +290,29 @@ project-root/
 
 ### Adding New Languages
 1. Add locale to `i18n.js` locales array
-2. Create new translation file in `messages/`
+2. Create new translation file in `messages/` directory
 3. Add button to `LanguageSwitcher.jsx`
 4. Update middleware matcher if needed
+5. Import the new JSON file in your demo components
 
 ### Modifying Content
-1. Edit translation files in `messages/`
-2. Add new translation keys
+1. Edit translation files in `messages/` directory
+2. Add new translation keys to JSON files
 3. Use keys in your components
 4. Test across all languages
+
+### Single Source of Truth
+This demo uses a centralized approach:
+- **One set of JSON files** (`messages/`) - used by both demos and full i18n
+- **No duplication** - all components import from the same source
+- **Easy maintenance** - edit one file, updates everywhere
+
+**Benefits:**
+- ✅ No confusion about which files to edit
+- ✅ Consistent translations across all demos
+- ✅ Industry standard JSON format
+- ✅ Works with both simple demos and full i18n setup
+- ✅ Single source of truth principle
 
 ### Styling Changes
 1. Update Tailwind classes in components
