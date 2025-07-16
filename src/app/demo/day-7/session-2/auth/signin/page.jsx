@@ -18,12 +18,12 @@ export default function SignIn() {
     }
   }, [searchParams]);
 
-  const handleGoogleSignIn = async () => {
+  const handleSignIn = async (provider) => {
     try {
       setIsLoading(true);
       setError(null);
       
-      const result = await signIn('google', {
+      const result = await signIn(provider, {
         callbackUrl,
         redirect: false,
       });
@@ -76,28 +76,52 @@ export default function SignIn() {
             </div>
           )}
 
-          {/* Sign In Button */}
-          <button
-            onClick={handleGoogleSignIn}
-            disabled={isLoading}
-            className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 ${
-              isLoading
-                ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg transform hover:scale-105'
-            }`}
-          >
-            {isLoading ? (
-              <div className="flex items-center justify-center gap-3">
-                <div className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
-                Signing in...
-              </div>
-            ) : (
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-2xl">🚀</span>
-                Continue with Google
-              </div>
-            )}
-          </button>
+          {/* Sign In Buttons */}
+          <div className="space-y-4">
+            <button
+              onClick={() => handleSignIn('google')}
+              disabled={isLoading}
+              className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 ${
+                isLoading
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg transform hover:scale-105'
+              }`}
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+                  Signing in...
+                </div>
+              ) : (
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-2xl">🚀</span>
+                  Continue with Google
+                </div>
+              )}
+            </button>
+
+            <button
+              onClick={() => handleSignIn('github')}
+              disabled={isLoading}
+              className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 border border-gray-600 ${
+                isLoading
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  : 'bg-gray-800 hover:bg-gray-900 text-white hover:shadow-lg transform hover:scale-105'
+              }`}
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+                  Signing in...
+                </div>
+              ) : (
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-2xl">🐙</span>
+                  Continue with GitHub
+                </div>
+              )}
+            </button>
+          </div>
 
           {/* Security Notice */}
           <div className="mt-6 p-4 bg-gray-700 rounded-lg border border-gray-600">
@@ -107,7 +131,7 @@ export default function SignIn() {
             </h3>
             <ul className="text-xs text-gray-400 space-y-1">
               <li>• Powered by NextAuth.js</li>
-              <li>• Uses Google OAuth 2.0</li>
+              <li>• Uses Google & GitHub OAuth 2.0</li>
               <li>• No passwords stored</li>
               <li>• Secure session management</li>
             </ul>
@@ -121,7 +145,7 @@ export default function SignIn() {
             </h3>
             <p className="text-xs text-yellow-200">
               This is a demonstration of NextAuth.js authentication. 
-              In a production environment, you would configure proper Google OAuth credentials.
+              In a production environment, you would configure proper Google and GitHub OAuth credentials.
             </p>
           </div>
         </div>
@@ -153,17 +177,17 @@ export default function SignIn() {
           <div className="space-y-3">
             <div className="flex items-center gap-3 p-3 bg-gray-700 rounded">
               <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
-              <span className="text-gray-300 text-sm">Click "Continue with Google"</span>
+              <span className="text-gray-300 text-sm">Choose Google or GitHub sign-in</span>
             </div>
             
             <div className="flex items-center gap-3 p-3 bg-gray-700 rounded">
               <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
-              <span className="text-gray-300 text-sm">Redirect to Google's secure login</span>
+              <span className="text-gray-300 text-sm">Redirect to provider's secure login</span>
             </div>
             
             <div className="flex items-center gap-3 p-3 bg-gray-700 rounded">
               <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
-              <span className="text-gray-300 text-sm">Google verifies your identity</span>
+              <span className="text-gray-300 text-sm">Provider verifies your identity</span>
             </div>
             
             <div className="flex items-center gap-3 p-3 bg-gray-700 rounded">

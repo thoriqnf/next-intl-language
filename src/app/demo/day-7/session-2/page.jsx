@@ -215,21 +215,31 @@ export default function Session2Demo() {
                 <div className="text-6xl mb-4">🔒</div>
                 <h3 className="text-xl font-bold mb-2">You're Not Logged In</h3>
                 <p className="text-gray-300 mb-6">
-                  Experience the authentication flow by signing in with Google
+                  Experience the authentication flow by signing in with Google or GitHub
                 </p>
               </div>
               
-              <button
-                onClick={() => signIn('google')}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-              >
-                <span>🚀</span>
-                Sign In with Google
-              </button>
+              <div className="space-y-3">
+                <button
+                  onClick={() => signIn('google')}
+                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                >
+                  <span>🚀</span>
+                  Sign In with Google
+                </button>
+                
+                <button
+                  onClick={() => signIn('github')}
+                  className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-900 transition-colors flex items-center justify-center gap-2 border border-gray-600"
+                >
+                  <span>🐙</span>
+                  Sign In with GitHub
+                </button>
+              </div>
               
               <div className="mt-4 text-center">
                 <p className="text-xs text-gray-400">
-                  This will redirect you to Google's secure login page
+                  This will redirect you to the secure login page for your chosen provider
                 </p>
               </div>
             </div>
